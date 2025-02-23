@@ -14,7 +14,7 @@ def load_tfidf(corpus: List[str]) -> np.ndarray:
     :param corpus: document list
     :return: tf-idf vectors
     """
-    model = TfidfVectorizer(ngram_range=(1,2), norm='l2', smooth_idf=True, max_features=500)
+    model = TfidfVectorizer(ngram_range=(1,2), norm='l2', smooth_idf=True, max_features=300)
     output = model.fit_transform(corpus)
     return output.toarray()
 

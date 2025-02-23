@@ -9,6 +9,7 @@ from nltk.stem import WordNetLemmatizer
 nltk.download("wordnet")
 nltk.download("omw-1.4")
 nltk.download('stopwords')
+nltk.download('punkt')
 
 """Using Movie Dataset From https://www.kaggle.com/datasets/tmdb/tmdb-movie-metadata/data"""
 MOVIE_COLUMNS = ['genres', 'keywords', 'production_companies', 'overview', 'status', 'title', 'tagline']
