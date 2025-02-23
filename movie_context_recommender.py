@@ -55,9 +55,7 @@ def get_args():
                         default = r"Data/tmdb_5000_movies.csv")
     parser.add_argument("--user_input",
                         type=str,
-                        help="Enter user movie preference",
-                        # TODO: remove this after testing
-                        default = "I love thrilling action movies set in space, with a comedic twist.")
+                        help="Enter user movie preference")
     parser.add_argument("--top_k",
                         type=int,
                         help="enter top k recommendations wanted",
