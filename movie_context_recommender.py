@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from data_process import finalize_movie_dataset, text_preprocessing
 
-RECOMMENDATION_COLUMNS = ['title', 'tagline', 'genres', 'overview', 'similarity_score']
+RECOMMENDATION_COLUMNS = ['title', 'similarity_score']
 
 def load_tfidf(corpus: List[str]) -> np.ndarray:
     """
@@ -43,8 +43,13 @@ def get_top_recommendations(movie_df: pd.DataFrame, top_k:int) -> pd.DataFrame:
     :return: top k movie recommendations
     """
     movie_df = movie_df.sort_values(by='similarity_score', ascending=False).reset_index(drop=True)
-    top_rec = movie_df.head(top_k)
-    return  top_rec[RECOMMENDATION_COLUMNS]
+    top_rec = movie_df.head(top_k)[RECOMMENDATION_COLUMNS].to_numpy()
+
+    print(f"Top {len(top_rec)} recommendations are:")
+    for i in range(len(top_rec)):
+        rec, score = top_rec[i]
+        print(f"{i+1}) '{rec}' with similarity score {score:.4f}")
+    return  top_rec
 
 
 def get_args():
@@ -67,6 +72,7 @@ def get_args():
 
 def main(file_path: str, user_input: str, top_k: int) -> pd.DataFrame:
     """Runs movie recommender given movie dataset path, user preference input, and top k integer"""
+    print(f"User preference input is: {user_input}")
     data = finalize_movie_dataset(file_path, size = 500)
     recommendations = context_recommender(user_input=user_input,
                                           movies_df=data,
@@ -77,4 +83,3 @@ def main(file_path: str, user_input: str, top_k: int) -> pd.DataFrame:
 if __name__ == "__main__":
     args = get_args()
     recs = main(args.read_path, args.user_input, args.top_k)
-    print(recs)
