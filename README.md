@@ -31,7 +31,7 @@ The dataset used is in path: Data/tmdb_5000_movies.csv
 2) Activate Conda environment
    conda activate content_recommender
 
-Here is a quick video on setting up the environent:
+Here is a quick video on setting up the environent: https://drive.google.com/file/d/13ZnHdpbzGsis2acuSEPuYcCHm3fDrMaZ/view?usp=sharing
 
 ## Running
 1) To run the recommendation system in command line, using the following format:
@@ -43,7 +43,7 @@ Here is a quick video on setting up the environent:
    EX: python -i movie_context_recommender.py --user_input "I love thrilling action movies set in space, with a comedic twist."
 
 ## Results
-Below is an example query & output from the recommendation system: https://drive.google.com/file/d/13ZnHdpbzGsis2acuSEPuYcCHm3fDrMaZ/view?usp=sharing
+Below is an example query & output from the recommendation system: 
 
 User preference input is: I love thrilling action movies set in space, with a comedic twist.
 Top 5 recommendations are:
