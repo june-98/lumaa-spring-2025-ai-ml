@@ -67,7 +67,7 @@ def get_args():
 
 def main(file_path: str, user_input: str, top_k: int) -> pd.DataFrame:
     """Runs movie recommender given movie dataset path, user preference input, and top k integer"""
-    data = finalize_movie_dataset(file_path)
+    data = finalize_movie_dataset(file_path, size = 500)
     recommendations = context_recommender(user_input=user_input,
                                           movies_df=data,
                                           encoder=load_tfidf)

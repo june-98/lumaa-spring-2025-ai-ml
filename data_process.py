@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pandas as pd
 import json
 import re
@@ -70,13 +72,17 @@ def add_movie_description(movie_attributes: pd.Series) -> str:
     description = " ".join([genres, keywords, movie_attributes['overview'], production_companies, movie_attributes['tagline']])
     return text_preprocessing(description)
 
-def finalize_movie_dataset(file_name: str)-> pd.DataFrame:
+def finalize_movie_dataset(file_name: str, size: Optional[int] = None)-> pd.DataFrame:
     """
     Prepare the movies dataset for vectorization
     :param file_name: movie dataset file path
+    :param size: select top size rows from the dataset (for quicker demonstration purposes)
     :return: movies_df
     """
     movies_df = get_movie_data(file_name)
     movies_df = data_processing(movies_df)
     movies_df['aggregate_description'] = movies_df.apply(add_movie_description, axis=1)
-    return movies_df
+    if size:
+        return movies_df.head(size)
+    else:
+        return movies_df
