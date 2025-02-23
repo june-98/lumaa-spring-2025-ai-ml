@@ -55,6 +55,7 @@ def get_args():
                         default = r"Data/tmdb_5000_movies.csv")
     parser.add_argument("--user_input",
                         type=str,
+                        required=True,
                         help="Enter user movie preference")
     parser.add_argument("--top_k",
                         type=int,
@@ -64,11 +65,16 @@ def get_args():
     args = parser.parse_args()
     return args
 
+def main(file_path: str, user_input: str, top_k: int) -> pd.DataFrame:
+    """Runs movie recommender given movie dataset path, user preference input, and top k integer"""
+    data = finalize_movie_dataset(file_path)
+    recommendations = context_recommender(user_input=user_input,
+                                          movies_df=data,
+                                          encoder=load_tfidf)
+    top_recs = get_top_recommendations(recommendations, top_k)
+    return top_recs
+
 if __name__ == "__main__":
     args = get_args()
-    data = finalize_movie_dataset(args.read_path)
-    recommendations = context_recommender(user_input=args.user_input,
-                               movies_df=data,
-                               encoder=load_tfidf)
-    top_recs = get_top_recommendations(recommendations, args.top_k)
-    print(top_recs)
+    recs = main(args.read_path, args.user_input, args.top_k)
+    print(recs)
